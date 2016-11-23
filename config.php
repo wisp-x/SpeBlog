@@ -16,9 +16,9 @@
  * DBCODE	数据库编码
 */
 define('DBHOST', 'localhost');
-define('DBUSER', '');
-define('DBPASS', '');
-define('DBBASE', '');
+define('DBUSER', 'speblog');
+define('DBPASS', 'speblog');
+define('DBBASE', 'speblog');
 define('DBPORT', '3306');
 define('DBCODE', 'utf8');
 
