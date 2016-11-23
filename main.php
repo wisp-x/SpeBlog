@@ -1,4 +1,5 @@
 <?php
+
 /**
  * SpeBlog 程序入口
  * @author 熊二哈

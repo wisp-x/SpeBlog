@@ -1,4 +1,5 @@
 <?php if (!defined('SPEBLOG')) exit('You can not directly access the file.');
+
 /**
  * SpeBlog 静态工具类
  * @author 熊二哈
@@ -15,7 +16,7 @@ Class Tools {
 	public static function is_empty($param) {
 		return ($param == null || trim($param) == "") ? true : false;
 	}
-	
+
 	/**
 	 * 处理页面接收的参数，防止SQL注入
 	 * @param string $param 接收的参数
@@ -35,7 +36,7 @@ Class Tools {
 		}
 		return ($return_param == null) ? null : trim(addslashes($return_param));
 	}
-	
+
 	/**
 	 * 处理通过POST表单的checkbox值
 	 * @param string $param
@@ -54,7 +55,7 @@ Class Tools {
 		}
 		return $return_array;
 	}
-	
+
 	/**
 	 * 判断是否接收到某参数
 	 * @param string $param
@@ -63,7 +64,7 @@ Class Tools {
 	public static function param_is_exits($param) {
 		return isset($_GET["$param"]) ? true : (isset($_POST["$param"]) ? true : false);
 	}
-	
+
 	/**
 	 * 获取访问者IP地址
 	 * @return Ambigous <string, unknown>
@@ -87,7 +88,7 @@ Class Tools {
 		}
 		return $ip;
 	}
-	
+
 	/**
 	 * 判断当前访问的是不是HTTPS
 	 * @return boolean
@@ -105,7 +106,7 @@ Class Tools {
 		}
 		return false;
 	}
-	
+
 	/**
 	 * 获取传入的开始和结束microtime()，获取两个时间相差的毫秒值
 	 * @param $start_microtime

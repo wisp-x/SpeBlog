@@ -1,4 +1,5 @@
 <?php if (!defined('SPEBLOG')) exit('You can not directly access the file.');
+
 /**
  * SpeBlog 控制器
  * @author 熊二哈
@@ -11,7 +12,7 @@ Class Controller {
 	private $action = "";
 
 	public static function init($mod, $action = "") {
-		require_once $mod . ".mod.php";
+		if(file_exists($mod . ".mod.php")) require_once $mod . ".mod.php";
 	}
 }
 ?>

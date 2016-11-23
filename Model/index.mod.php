@@ -1,4 +1,5 @@
 <?php if (!defined('SPEBLOG')) exit('You can not directly access the file.');
+
 /**
  * SpeBlog 逻辑处理
  * @author 熊二哈
@@ -8,5 +9,7 @@
 global $mod;
 global $action;
 
-include VIEW_ROUTE . "index.inc.php";
+require VIEW_ROUTE . "common/header.inc.php";
+require VIEW_ROUTE . "index.inc.php";
+require VIEW_ROUTE . "common/footer.inc.php";
 ?>

@@ -1,6 +1,7 @@
 <?php
+
 /**
- * SpeBlog 程序入口
+ * SpeBlog
  * @author 熊二哈
  * @link http://www.xlogs.cn
  */

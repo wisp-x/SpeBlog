@@ -1,4 +1,5 @@
 <?php if (!defined('SPEBLOG')) exit('You can not directly access the file.');
+
 /**
  * SpeBlog 配置文件
  * @author 熊二哈
