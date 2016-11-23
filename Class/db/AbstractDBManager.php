@@ -2,9 +2,9 @@
 
 /**
  * 数据库抽象类
-* @author 冬天的秘密
-* @link http://blog.itpk.cn
-*/
+ * @author 冬天的秘密
+ * @link http://blog.itpk.cn
+ */
 
 class AbstractDBManager {
 

@@ -36,6 +36,6 @@ define('TOOLS_ROUTE', ROOT . 'Class/tools/');
  * 默认模板
  * @var unknown
  */
-define('VIEW_ROUTE', ROOT . 'View/default/');
+define('VIEW_ROUTE', ROOT . 'View/speblog/');
 
 ?>

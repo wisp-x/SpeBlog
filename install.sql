@@ -18,3 +18,24 @@ CREATE TABLE `spe_config` (
 BEGIN;
 INSERT INTO `spe_config` VALUES ('sitename', 'SpeBlog'), ('keywords', 'SpeBlog,Blog,简约博客'), ('description', 'SpeBlog，简约、快速的视觉体验');
 COMMIT;
+
+-- ----------------------------
+--  Table structure for `spe_user`
+-- ----------------------------
+DROP TABLE IF EXISTS `spe_user`;
+CREATE TABLE `spe_user` (
+	`id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '用户ID',
+	`username` VARCHAR(16) NOT NULL UNIQUE COMMENT '账号昵称',
+	`password` VARCHAR(32) NOT NULL COMMENT '账号密码',
+	`user_check` VARCHAR(64) NULL COMMENT '登录状态',
+	`sign_ip` VARCHAR(15) NOT NULL COMMENT '最后登录IP',
+	`createdate` INT NOT NULL COMMENT '最后登录时间'
+) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE utf8_general_ci;
+
+-- ----------------------------
+--  Records of `spe_user`
+-- ----------------------------
+INSERT INTO `spe_user` (`username`, `password`, `user_check`, `sign_ip`, `createdate`) VALUES ('admin', 'e10adc3949ba59abbe56e057f20f883e', '', '172.168.0.1', '123456');
+
+
+
