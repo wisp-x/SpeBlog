@@ -1,4 +1,7 @@
 @CHARSET "UTF-8";
+a {
+	text-decoration:none;
+}
 body {
 	padding-top: 70px;
 }

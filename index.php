@@ -8,8 +8,8 @@
 
 require 'main.php';
 
-$mod = Tools::param_filter("mod", "index");
-$action = Tools::param_filter("action");
+$mod = param_filter("mod", "index");
+$action = param_filter("action");
 
 Controller::init(MODEL_ROUTE . $mod, $action);
 
