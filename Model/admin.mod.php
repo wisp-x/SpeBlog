@@ -17,9 +17,15 @@ if($WebConfig) {
 	$keywords = $WebConfig[1]['value'];
 	$description = $WebConfig[2]['value'];
 }
-$WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_menu` WHERE `name` = 'menu'", true);
+
+$WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'menu'", true);
 if($WebMenu) {
-	$tomenu = $WebMenu['menu'];
+	$tomenu = $WebMenu['box'];
+}
+
+$WebLinks = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'links'", true);
+if($WebLinks) {
+	$links = $WebLinks['box'];
 }
 
 # ======> Login status
@@ -75,7 +81,18 @@ if($Admin) {
 		header("content-type:text/plain; charset=utf-8");
 		$result = array();
 		$menuhtm = $_POST['menuhtm'];
-		$setMenu = $mysqli->db->executeQuery("UPDATE `spe_menu` SET `menu` = '{$menuhtm}' WHERE `name` = 'menu'");
+		$setMenu = $mysqli->db->executeQuery("UPDATE `spe_system` SET `box` = '{$menuhtm}' WHERE `name` = 'menu'") > 0 ? true:false;
+		if($setMenu) {
+			$result['code'] = 1;
+		} else {
+			$result['code'] = 0;
+		}
+		exit(json_encode($result));
+	} elseif ($action == "setLinks") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$linkshtm = $_POST['linkshtm'];
+		$setMenu = $mysqli->db->executeQuery("UPDATE `spe_system` SET `box` = '{$linkshtm}' WHERE `name` = 'links'") > 0 ? true:false;
 		if($setMenu) {
 			$result['code'] = 1;
 		} else {

@@ -17,9 +17,15 @@ if($WebConfig) {
 	$keywords = $WebConfig[1]['value'];
 	$description = $WebConfig[2]['value'];
 }
-$WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_menu` WHERE `name` = 'menu'", true);
+
+$WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'menu'", true);
 if($WebMenu) {
-	$tomenu = $WebMenu['menu'];
+	$tomenu = $WebMenu['box'];
+}
+
+$WebLinks = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'links'", true);
+if($WebLinks) {
+	$links = $WebLinks['box'];
 }
 
 require VIEW_ROUTE . "common/header.inc.php";
