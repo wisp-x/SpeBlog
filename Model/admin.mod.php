@@ -59,7 +59,12 @@ if($Admin) {
 		header("content-type:text/plain; charset=utf-8");
 		$result = array();
 		setcookie('user_check', '', time() - 3600);
-		$result['code'] = 1;
+		$logout = $mysqli->db->executeQuery("UPDATE `spe_user` SET `user_check` = 0 WHERE `user_check` = '{$Admin['user_check']}'") > 0 ? true:false;
+		if($logout) {
+			$result['code'] = 1;
+		} else {
+			$result['code'] = 0;
+		}
 		exit(json_encode($result));
 	} elseif ($action == "setSystem") {
 		header("content-type:text/plain; charset=utf-8");
