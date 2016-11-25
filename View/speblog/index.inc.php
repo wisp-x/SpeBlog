@@ -7,10 +7,7 @@
 		</center>
 	</div>
 	<div id="menu" class="text-center">
-		<a href="javascript:void(0)">菜单</a>
-		<a href="javascript:void(0)">菜单</a>
-		<a href="javascript:void(0)">菜单</a>
-		<a href="javascript:void(0)">菜单</a>
+		<?php echo $tomenu ;?>
 	</div>
 	<div id="box" class="container">
 		<div class="row">

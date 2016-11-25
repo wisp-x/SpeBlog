@@ -17,6 +17,10 @@ if($WebConfig) {
 	$keywords = $WebConfig[1]['value'];
 	$description = $WebConfig[2]['value'];
 }
+$WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_menu` WHERE `name` = 'menu'", true);
+if($WebMenu) {
+	$tomenu = $WebMenu['menu'];
+}
 
 require VIEW_ROUTE . "common/header.inc.php";
 require VIEW_ROUTE . "index.inc.php";

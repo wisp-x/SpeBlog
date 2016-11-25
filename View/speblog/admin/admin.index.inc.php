@@ -31,6 +31,3 @@
 		<?php } ;?>
 	  </div>
 	</div>
-	<script>
-		
-	</script>

@@ -37,5 +37,26 @@ CREATE TABLE `spe_user` (
 -- ----------------------------
 INSERT INTO `spe_user` (`username`, `password`, `user_check`, `sign_ip`, `createdate`) VALUES ('admin', 'e10adc3949ba59abbe56e057f20f883e', '', '172.168.0.1', '123456');
 
+-- ----------------------------
+--  Table structure for `spe_menu`
+-- ----------------------------
+DROP TABLE IF EXISTS `spe_menu`;
+CREATE TABLE `spe_menu` (
+	`id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '导航ID',
+	`name` VARCHAR(16) NOT NULL UNIQUE COMMENT '名称',
+	`menu` TEXT NOT NULL COMMENT 'Menu'
+) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE utf8_general_ci;
+
+-- ----------------------------
+--  Records of `spe_menu`
+-- ----------------------------
+INSERT INTO `spe_menu` (name, menu) VALUES (
+'menu',
+'<a href="javascript:void(0)">菜单</a>
+<a href="javascript:void(0)">菜单</a>
+<a href="javascript:void(0)">菜单</a>
+<a href="javascript:void(0)">菜单</a>'
+);
+
 
 
