@@ -1,11 +1,106 @@
 @CHARSET "UTF-8";
-a {
-	text-decoration:none;
-}
+
 body {
-	padding-top: 70px;
+  font-family: "微软雅黑", "宋体", "新宋体";
+  color: #555;
 }
 
-#footer {
-	margin-top: 30px;
+a {outline: none;text-decoration: none;blr: expression(this.onFocus=this.blur());}
+a:link{text-decoration:none;}
+a:visited{text-decoration:none;}
+a:hover{text-decoration:none;}
+a:active{text-decoration:none;}
+
+h1, .h1,
+h2, .h2,
+h3, .h3,
+h4, .h4,
+h5, .h5,
+h6, .h6 {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: normal;
+}
+
+#me {
+	background-image: url("/View/speblog/img/bj-0.jpg");
+	background-size: cover;
+  	background-position: center center;
+	margin: 0;
+	overflow: hidden;
+}
+
+#me center div {
+	margin: 8.5%;
+}
+
+#me center div img {
+	width: 100px;
+	height: 100px;
+	margin: 10px;
+}
+
+#menu {
+	padding: 5px;
+	overflow: hidden;
+	background-color: #DDD;
+	border-top: 3px solid #AAA;
+}
+
+#menu a {
+	margin: 10px;
+	padding: 4px;
+}
+
+#avatar {
+	border: 5px solid #DDD;
+}
+#avatar:hover {
+	border: 5px solid #FF3EFF;
+}
+#box {
+	margin-top: 20px;
+	/** border: 1px solid #DDD; **/
+}
+#blog-word {
+	margin-bottom: 10px;
+	padding: 10px;
+	border-bottom: 1px solid #DDD;
+	word-wrap: break-word;
+	kword-break: normal;
+	word-break: break-all;
+}
+#admin {
+	padding-top: 70px;
+}
+#admin_header {
+	padding: 20px;
+	background: #DDD;
+	border-bottom: 3px solid #AAA;
+}
+.row {
+	margin-right: 0;
+	margin-left: 0;
+}
+#admin_menu {
+	background: #4d5e70;
+	color: #aab1b7;
+	padding-right: 0;
+	padding-left: 0;
+	border-bottom: 3px solid #AAA;
+}
+#admin_menu .nav-pills>li>a {
+	border-radius: 0;
+}
+#admin_menu .nav-pills>li>a:hover {
+	border-right: 3px solid #DDD;
+	background: #3d4e60;
+}
+#admin_menu ul .active {
+	border-right: 3px solid #DDD;
+	background: #3d4e60;
+}
+#admin_box {
+	padding: 10px;
 }

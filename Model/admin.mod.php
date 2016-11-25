@@ -31,9 +31,10 @@ if($action == "login") {
 		$login = $mysqli->db->executeQuery("SELECT * FROM `spe_user` WHERE `username` = '{$username}' AND `password` = '{$password}'") > 0 ? true:false;
 		if($login) {
 			$data = time();
+			$ip = getIP();
 			$user_check = base64_encode(md5("SPEBLOG" . getRandString(12, 0) . $date));
 			setcookie('user_check', $user_check, time() + (60 * 60 * 24 * 30));
-			$login = $mysqli->db->executeQuery("UPDATE `spe_user` SET `user_check` = '{$user_check}' WHERE `username` = '{$username}' AND `password` = '{$password}'") > 0 ? true:false;
+			$login = $mysqli->db->executeQuery("UPDATE `spe_user` SET `user_check` = '{$user_check}', `sign_ip` = '{$ip}', `createdate` = $data WHERE `username` = '{$username}' AND `password` = '{$password}'") > 0 ? true:false;
 			if($login) {
 				$result['code'] = 1;
 			}
@@ -47,6 +48,23 @@ if($action == "login") {
 	$result = array();
 	setcookie('user_check', '', time() - 3600);
 	$result['code'] = 1;
+	exit(json_encode($result));
+} elseif ($action == "setSystem") {
+	header("content-type:text/plain; charset=utf-8");
+	$result = array();
+	$sitename = param_filter("sitename");
+	$keywords = param_filter("keywords");
+	$description = param_filter("description");
+	$setSystem = $mysqli->db->executeMultiQuery(
+		"UPDATE `spe_config` SET `value` =  '{$sitename}' WHERE `key` = 'sitename';".
+		"UPDATE `spe_config` SET `value` =  '{$keywords}' WHERE `key` = 'keywords';".
+		"UPDATE `spe_config` SET `value` =  '{$description}' WHERE `key` = 'description';"
+		);
+	if($setSystem) {
+		$result['code'] = 1;
+	} else {
+		$result['code'] = 0;
+	}
 	exit(json_encode($result));
 }
 

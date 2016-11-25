@@ -12,7 +12,7 @@ global $mysqli;
 
 $WebConfig = $mysqli->db->executeQuery("SELECT * FROM  `spe_config`", true);
 if($WebConfig) {
-	$title = "首页";
+	$title = "〆我在纯白的世界里做着有关救赎的梦";
 	$sitename = $WebConfig[0]['value'];
 	$keywords = $WebConfig[1]['value'];
 	$description = $WebConfig[2]['value'];
