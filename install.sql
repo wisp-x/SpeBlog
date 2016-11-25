@@ -60,9 +60,14 @@ INSERT INTO `spe_system` (`name`, `box`) VALUES (
 
 INSERT INTO `spe_system` (`name`, `box`) VALUES (
 'links',
-'<p>test</p>'
+'<p class="text-center">
+<a href="javascript:void(0)" target="_blank">友情链接</a>
+<a href="javascript:void(0)" target="_blank">友情链接</a>
+<a href="javascript:void(0)" target="_blank">友情链接</a>
+<a href="javascript:void(0)" target="_blank">友情链接</a>
+</p>'
 );
 
-
+INSERT INTO `spe_system` (`name`, `box`) VALUES ('css', '');
 
 

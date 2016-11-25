@@ -19,14 +19,14 @@ if($WebConfig) {
 }
 
 $WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'menu'", true);
-if($WebMenu) {
-	$tomenu = $WebMenu['box'];
-}
+if($WebMenu) $tomenu = $WebMenu['box'];
 
 $WebLinks = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'links'", true);
-if($WebLinks) {
-	$links = $WebLinks['box'];
-}
+if($WebLinks) $links = $WebLinks['box'];
+
+$WebCss = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'css'", true);
+if($WebCss) $css = $WebCss['box'];
+
 
 require VIEW_ROUTE . "common/header.inc.php";
 require VIEW_ROUTE . "index.inc.php";

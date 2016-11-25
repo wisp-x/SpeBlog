@@ -1,5 +1,8 @@
 <?php if (!defined('SPEBLOG')) exit('You can not directly access the file.'); ?>
 <div id="system">
+		<blockquote>
+			<p>系统设置</p>
+		</blockquote>
 	  <div class="form-group">
 	    <label>网站名称</label>
 	    <input type="text" id="sitename" class="form-control" value="<?php echo $sitename ;?>" placeholder="SpeBlog">

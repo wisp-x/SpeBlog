@@ -19,14 +19,13 @@ if($WebConfig) {
 }
 
 $WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'menu'", true);
-if($WebMenu) {
-	$tomenu = $WebMenu['box'];
-}
+if($WebMenu) $tomenu = $WebMenu['box'];
 
 $WebLinks = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'links'", true);
-if($WebLinks) {
-	$links = $WebLinks['box'];
-}
+if($WebLinks) $links = $WebLinks['box'];
+
+$WebCss = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'css'", true);
+if($WebCss) $css = $WebCss['box'];
 
 # ======> Login status
 if(isset($_COOKIE['user_check'])) $Admin = $mysqli->db->executeQuery("SELECT * FROM `spe_user` WHERE `user_check` = '{$_COOKIE['user_check']}'", true);
@@ -92,8 +91,19 @@ if($Admin) {
 		header("content-type:text/plain; charset=utf-8");
 		$result = array();
 		$linkshtm = $_POST['linkshtm'];
-		$setMenu = $mysqli->db->executeQuery("UPDATE `spe_system` SET `box` = '{$linkshtm}' WHERE `name` = 'links'") > 0 ? true:false;
-		if($setMenu) {
+		$setLinks = $mysqli->db->executeQuery("UPDATE `spe_system` SET `box` = '{$linkshtm}' WHERE `name` = 'links'") > 0 ? true:false;
+		if($setLinks) {
+			$result['code'] = 1;
+		} else {
+			$result['code'] = 0;
+		}
+		exit(json_encode($result));
+	} elseif ($action == "setCss") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$css = $_POST['css'];
+		$setCss = $mysqli->db->executeQuery("UPDATE `spe_system` SET `box` = '{$css}' WHERE `name` = 'css'") > 0 ? true:false;
+		if($setCss) {
 			$result['code'] = 1;
 		} else {
 			$result['code'] = 0;
