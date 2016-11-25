@@ -30,30 +30,32 @@ if($WebCss) $css = $WebCss['box'];
 # ======> Login status
 if(isset($_COOKIE['user_check'])) $Admin = $mysqli->db->executeQuery("SELECT * FROM `spe_user` WHERE `user_check` = '{$_COOKIE['user_check']}'", true);
 
-if($Admin) {
-	# ======> Processing AJAX requests
-	if($action == "login") {
-		header("content-type:text/plain; charset=utf-8");
-		$result = array();
-		$username = param_filter("username");
-		$password = md5(param_filter("password"));
-		if(!is_empty($username) && !is_empty($password)) {
-			$login = $mysqli->db->executeQuery("SELECT * FROM `spe_user` WHERE `username` = '{$username}' AND `password` = '{$password}'") > 0 ? true:false;
+
+# ======> Processing AJAX requests
+if($action == "login") {
+	header("content-type:text/plain; charset=utf-8");
+	$result = array();
+	$username = param_filter("username");
+	$password = md5(param_filter("password"));
+	if(!is_empty($username) && !is_empty($password)) {
+		$login = $mysqli->db->executeQuery("SELECT * FROM `spe_user` WHERE `username` = '{$username}' AND `password` = '{$password}'") > 0 ? true:false;
+		if($login) {
+			$data = time();
+			$ip = getIP();
+			$user_check = base64_encode(md5("SPEBLOG" . getRandString(12, 0) . $date));
+			setcookie('user_check', $user_check, time() + (60 * 60 * 24 * 30));
+			$login = $mysqli->db->executeQuery("UPDATE `spe_user` SET `user_check` = '{$user_check}', `sign_ip` = '{$ip}', `createdate` = $data WHERE `username` = '{$username}' AND `password` = '{$password}'") > 0 ? true:false;
 			if($login) {
-				$data = time();
-				$ip = getIP();
-				$user_check = base64_encode(md5("SPEBLOG" . getRandString(12, 0) . $date));
-				setcookie('user_check', $user_check, time() + (60 * 60 * 24 * 30));
-				$login = $mysqli->db->executeQuery("UPDATE `spe_user` SET `user_check` = '{$user_check}', `sign_ip` = '{$ip}', `createdate` = $data WHERE `username` = '{$username}' AND `password` = '{$password}'") > 0 ? true:false;
-				if($login) {
-					$result['code'] = 1;
-				}
-			} else {
-				$result['code'] = 0;
+				$result['code'] = 1;
 			}
+		} else {
+			$result['code'] = 0;
 		}
-		exit(json_encode($result));
-	} elseif ($action == "logout") {
+	}
+	exit(json_encode($result));
+}
+if($Admin) {
+	if ($action == "logout") {
 		header("content-type:text/plain; charset=utf-8");
 		$result = array();
 		setcookie('user_check', '', time() - 3600);
@@ -107,6 +109,36 @@ if($Admin) {
 			$result['code'] = 1;
 		} else {
 			$result['code'] = 0;
+		}
+		exit(json_encode($result));
+	} elseif ($action == "setData") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$username = param_filter("username");
+		if (!is_empty($username)) {
+			$setData = $mysqli->db->executeQuery("UPDATE `spe_user` SET `username` = '{$username}' WHERE `user_check` = '{$Admin['user_check']}'") > 0 ? true:false;
+			if($setData) {
+				$result['code'] = 1;
+			} else {
+				$result['code'] = 0;
+			}
+		}
+		exit(json_encode($result));
+	} elseif ($action == "setPassWord") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$pass1 = md5(param_filter("pass1"));
+		$pass2 = md5(param_filter("pass2"));
+		$passCheck = $mysqli->db->executeQuery("SELECT * FROM `spe_user` WHERE `user_check` = '{$Admin['user_check']}' AND `password` = '{$pass1}'") > 0 ? true:false;
+		if($passCheck) {
+			$setPass = $mysqli->db->executeQuery("UPDATE `spe_user` SET `password` = '{$pass2}' WHERE `user_check` = '{$Admin['user_check']}' AND `password` = '{$pass1}'") > 0 ? true:false;
+			if($setPass) {
+				$result['code'] = 1;
+			} else {
+				$result['code'] = 0;
+			}
+		} else {
+			$result['code'] = 2;
 		}
 		exit(json_encode($result));
 	}

@@ -52,10 +52,8 @@ CREATE TABLE `spe_system` (
 -- ----------------------------
 INSERT INTO `spe_system` (`name`, `box`) VALUES (
 'menu',
-'<a href="javascript:void(0)">菜单</a>
-<a href="javascript:void(0)">菜单</a>
-<a href="javascript:void(0)">菜单</a>
-<a href="javascript:void(0)">菜单</a>'
+'<a href="javascript:void(0)">首页</a>
+<a href="javascript:void(0)">关于</a>
 );
 
 INSERT INTO `spe_system` (`name`, `box`) VALUES (

@@ -13,6 +13,7 @@
 			<li role="presentation" class="<?php echo $menu == "articles" ? "active" : false;?>"><a href="?mod=admin&menu=articles"><i class="fa fa-pagelines fa-fw"></i> 文章管理</a></li>
 			<li role="presentation" class="<?php echo $menu == "replys" ? "active" : false;?>"><a href="?mod=admin&menu=replys"><i class="fa fa-comments fa-fw"></i> 评论管理</a></li>
 			<li role="presentation" class="<?php echo $menu == "links" ? "active" : false;?>"><a href="?mod=admin&menu=links"><i class="fa fa-link fa-fw"></i> 链接管理</a></li>
+			<li role="presentation" class="<?php echo $menu == "user" ? "active" : false;?>"><a href="?mod=admin&menu=user"><i class="fa fa-user fa-fw"></i> 账号管理</a></li>
 			<li role="presentation" class="<?php echo $menu == "css" ? "active" : false;?>"><a href="?mod=admin&menu=css"><i class="fa fa-css3 fa-fw"></i> 自定义CSS</a></li>
 		</ul>
 	  </div>
@@ -29,6 +30,8 @@
 		<?php require VIEW_ROUTE . 'admin/box/replys.box.php';?>
 		<?php } elseif ($menu == "links") { ;?>
 		<?php require VIEW_ROUTE . 'admin/box/links.box.php';?>
+		<?php } elseif ($menu == "user") { ;?>
+		<?php require VIEW_ROUTE . 'admin/box/user.box.php';?>
 		<?php } elseif ($menu == "css") { ;?>
 		<?php require VIEW_ROUTE . 'admin/box/css.box.php';?>
 		<?php } ;?>
