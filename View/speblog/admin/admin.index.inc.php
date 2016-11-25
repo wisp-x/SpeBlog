@@ -15,6 +15,7 @@
 			<li role="presentation" class="<?php echo $menu == "links" ? "active" : false;?>"><a href="?mod=admin&menu=links"><i class="fa fa-link fa-fw"></i> 链接管理</a></li>
 			<li role="presentation" class="<?php echo $menu == "user" ? "active" : false;?>"><a href="?mod=admin&menu=user"><i class="fa fa-user fa-fw"></i> 账号管理</a></li>
 			<li role="presentation" class="<?php echo $menu == "css" ? "active" : false;?>"><a href="?mod=admin&menu=css"><i class="fa fa-css3 fa-fw"></i> 自定义CSS</a></li>
+			<li role="presentation" class="text-center"><a href="?mod=admin&action=logout" class="btn btn-danger" role="button">退出后台</a></li>
 		</ul>
 	  </div>
 	  <div id="admin_box" class="col-md-11">

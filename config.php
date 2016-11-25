@@ -23,6 +23,11 @@ define('DBPORT', '3306');
 define('DBCODE', 'utf8');
 
 /**
+ * 网站安装二级目录(如果您安装本程序是在二级目录下，请配置二级目录名称)
+ */
+define('WEBSITE', "demo");
+
+/**
  * 系统文件夹
  */
 define('ROOT', dirname(__FILE__) . "/");
