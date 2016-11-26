@@ -6,5 +6,4 @@
 	<blockquote>
 		<p>文章管理</p>
 	</blockquote>
-	<h1>文章管理</h1>
 </div>
