@@ -16,7 +16,7 @@ CREATE TABLE `spe_config` (
 --  Records of `spe_config`
 -- ----------------------------
 BEGIN;
-INSERT INTO `spe_config` VALUES ('sitename', 'SpeBlog'), ('keywords', 'SpeBlog,Blog,简约博客'), ('description', 'SpeBlog，简约、快速的视觉体验');
+INSERT INTO `spe_config` VALUES ('sitename', 'SpeBlog'), ('keywords', 'SpeBlog,Blog,简约博客'), ('description', 'SpeBlog，一款优雅而简约、快速的博客程序');
 COMMIT;
 
 -- ----------------------------
