@@ -107,7 +107,7 @@ h6, .h6 {
 }
 #admin_menu #admin_li {
 	padding: 20px;
-	border-bottom: 1px solid #AAA;
+	border-bottom: 1px solid #888;
 }
 @media screen and (max-width: 768px) {
     #admin_menu {
