@@ -7,6 +7,7 @@
 	  <div id="admin_menu" class="col-md-1">
 	  	<ul class="nav nav-pills nav-stacked" role="tablist">
 	  		<?php $_GET['menu'] == "" ? $menu = "index" : $menu = $_GET['menu'];?>
+	  		<li role="presentation" id="admin_li"><b><i class="fa fa-user-secret"></i> <?php echo $Admin['username']; ;?></b></li>
 			<li role="presentation" class="<?php echo $menu == "index" ? "active" : false;?>"><a href="?mod=admin&menu=index"><i class="fa fa-server fa-fw"></i> 系统信息</a></li>
 			<li role="presentation" class="<?php echo $menu == "system" ? "active" : false;?>"><a href="?mod=admin&menu=system"><i class="fa fa-cog fa-fw"></i> 系统设置</a></li>
 			<li role="presentation" class="<?php echo $menu == "menus" ? "active" : false;?>"><a href="?mod=admin&menu=menus"><i class="fa fa-navicon fa-fw"></i> 导航管理</a></li>

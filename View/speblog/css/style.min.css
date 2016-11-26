@@ -105,6 +105,10 @@ h6, .h6 {
 #admin_box {
 	padding: 10px;
 }
+#admin_menu #admin_li {
+	padding: 20px;
+	border-bottom: 1px solid #AAA;
+}
 @media screen and (max-width: 768px) {
     #admin_menu {
     	height: auto;
