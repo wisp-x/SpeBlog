@@ -7,9 +7,9 @@
 	  <div id="admin_menu" class="col-md-1">
 	  	<ul class="nav nav-pills nav-stacked" role="tablist">
 	  		<?php $_GET['menu'] == "" ? $menu = "index" : $menu = $_GET['menu'];?>
-			<li role="presentation" class="<?php echo $menu == "index" ? "active" : false;?>"><a href="?mod=admin&menu=index"><i class="fa fa-inbox fa-fw"></i> 系统信息</a></li>
+			<li role="presentation" class="<?php echo $menu == "index" ? "active" : false;?>"><a href="?mod=admin&menu=index"><i class="fa fa-server fa-fw"></i> 系统信息</a></li>
 			<li role="presentation" class="<?php echo $menu == "system" ? "active" : false;?>"><a href="?mod=admin&menu=system"><i class="fa fa-cog fa-fw"></i> 系统设置</a></li>
-			<li role="presentation" class="<?php echo $menu == "menus" ? "active" : false;?>"><a href="?mod=admin&menu=menus"><i class="fa fa-cloud fa-fw"></i> 导航管理</a></li>
+			<li role="presentation" class="<?php echo $menu == "menus" ? "active" : false;?>"><a href="?mod=admin&menu=menus"><i class="fa fa-navicon fa-fw"></i> 导航管理</a></li>
 			<li role="presentation" class="<?php echo $menu == "articles" ? "active" : false;?>"><a href="?mod=admin&menu=articles"><i class="fa fa-pagelines fa-fw"></i> 文章管理</a></li>
 			<li role="presentation" class="<?php echo $menu == "replys" ? "active" : false;?>"><a href="?mod=admin&menu=replys"><i class="fa fa-comments fa-fw"></i> 评论管理</a></li>
 			<li role="presentation" class="<?php echo $menu == "links" ? "active" : false;?>"><a href="?mod=admin&menu=links"><i class="fa fa-link fa-fw"></i> 链接管理</a></li>
