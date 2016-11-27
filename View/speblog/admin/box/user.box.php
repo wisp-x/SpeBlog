@@ -5,7 +5,7 @@
 	</blockquote>
 	<div class="form-group">
 		<label>用户名</label>
-		<input type="text" id="username" class="form-control" value="<?php echo $Admin['username'] ;?>" placeholder="昵称">
+		<input type="text" id="username" class="form-control" value="<?php echo $Admin['username'] ?>" placeholder="昵称">
 	</div>
 	<button type="button" id="setData" class="btn btn-default">修改资料</button><hr/>
 	<blockquote>

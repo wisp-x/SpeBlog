@@ -13,6 +13,8 @@
 			</tr>
 		</thead>
 		<tbody>
+			<?php if($WebBlog) { ?>
+			<?php } ?>
 			<tr>
 				<td>TEST</td>
 				<td>TEST</td>
