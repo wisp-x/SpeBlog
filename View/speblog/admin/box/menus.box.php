@@ -3,6 +3,6 @@
 	<blockquote>
 		<p>自定义导航(html)</p>
 	</blockquote>
-	<textarea id="menu_htm" class="form-control" rows="10"><?php echo $tomenu ;?></textarea>
+	<textarea id="menu_htm" class="form-control" rows="20"><?php echo $tomenu ;?></textarea>
 	<br/><button type="button" id="setMenu" class="btn btn-default">修改</button>
 </div>

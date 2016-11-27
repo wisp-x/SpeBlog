@@ -20,6 +20,7 @@ function __autoload($className) {
 $mysqli = new WebDBConnection();
 
 require TOOLS_ROUTE . "Tools.php";
+require TOOLS_ROUTE . "Page.php";
 require CONTROLLER_ROUTE . "Controller.php";
 
 ?>

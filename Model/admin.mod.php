@@ -149,7 +149,7 @@ if($Admin) {
 	} elseif ($action == "addArticle") {
 		header("content-type:text/plain; charset=utf-8");
 		$result = array();
-		$article_title = param_filter("articles_title");
+		$article_title = htmlspecialchars(param_filter("articles_title"));
 		$article_html = param_filter("articles_html");
 		if(!is_empty($article_title) && !is_empty($article_html)) {
 			$ip = getIP();
