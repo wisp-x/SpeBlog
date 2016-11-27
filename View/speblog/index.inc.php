@@ -31,3 +31,10 @@
 			</div>
 		</div>
 	</div>
+	<div class="text-center" style="margin-top: 10px;">
+		<nav>
+  			<ul class="pagination">
+			<?php echo $pageno->showPages(1); ;?>
+			</ul>
+		</nav>
+	</div>

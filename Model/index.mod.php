@@ -27,7 +27,13 @@ if($WebLinks) $links = $WebLinks['box'];
 $WebCss = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'css'", true);
 if($WebCss) $css = $WebCss['box'];
 
-$WebBlog = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC", true, true);
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageSize = 5;//每页显示条数
+$pageNow = ($page - 1) * $pageSize;
+$BlogNum = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC", true, true);
+$WebBlog = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC LIMIT {$pageNow}, {$pageSize}", true, true);
+
+$pageno = new Page(count($BlogNum), 5, $page, $pageSize);
 
 require VIEW_ROUTE . "common/header.inc.php";
 require VIEW_ROUTE . "index.inc.php";

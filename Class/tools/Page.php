@@ -1,191 +1,132 @@
 <?php if (!defined('SPEBLOG')) exit('You can not directly access the file.');
 /**
  * 分页工具类
- * @author 熊二哈
- * @link http://www.xlogs.cn
+ * @author dzer
+ * @link http://www.oschina.net/code/snippet_1384720_51248
  */
-class PageUtil {
 
-	private $limit;
-	private $count;
-	private $pageno;
-	private $maxpage;
+/*
+ * 思路：
+ * 给我一个 总页数，需要显示的页数，当前页，每页显示的条数，连接
+ * 写一个方法 生成一个一维数组，键为页码 值为连接
+ * 写一个方法 返回一个生成好样式的页码（并且可以根据自己需要添加样式）
+ * 默认样式 共45条记录,每页显示10条,当前第1/4页 [首页] [上页] [1] [2] [3] .. [下页] [尾页]
+ */
 
-	private function setLimit($limit) {
-		if (!is_numeric($limit) || $limit <= 1) {
-			$this->limit = 1;
+class Page {
+
+	protected $count;       //总条数
+	protected $showPages;   //需要显示的页数
+	protected $countPages;  //总页数
+	protected $currPage;    //当前页
+	protected $subPages;    //每页显示条数
+	protected $href;        //连接
+	protected $page_arr = array();    //保存生成的页码 键页码 值为连接
+
+	/**
+	 * __construct  构造函数（获取分页所需参数）
+	 * @param int $count     总条数
+	 * @param int $showPages 显示页数
+	 * @param int $currPage  当前页数
+	 * @param int $subPages  每页显示数量
+	 * @param string $href   连接（不设置则获取当前URL）
+	 */
+	public function __construct($count, $showPages, $currPage, $subPages, $href = ''){
+		$this->count = $count;
+		$this->showPages = $showPages;
+		$this->currPage = $currPage;
+		$this->subPages = $subPages;
+		 
+		//如果链接没有设置则获取当前连接
+		if(empty($href)) {
+			$this->href = htmlentities($_SERVER['PHP_SELF']);
 		} else {
-			$this->limit = $limit;
+			$this->href = $href;
+		}
+		$this->construct_Pages();
+	}
+
+	/**
+	 * getPages 返回页码数组
+	 * @return array 一维数组 键为页码 值为链接
+	 */
+	public function getPages(){
+		return $this->page_arr;
+	}
+
+	/**
+	 * showPages 返回生成好的页码
+	 * @param  int $style 样式
+	 * @return string     生成好的页码
+	 */
+	public function showPages($style = 1){
+		$func = 'pageStyle' . $style;
+		return $this->$func();
+	}
+
+	/**
+	 * pageStyle1 分页样式（可参照这个添加自定义样式 例如pageStyle2（））
+	 * 样式 共45条记录,每页显示10条,当前第1/4页 [首页] [上页] [1] [2] [3] .. [下页] [尾页]
+	 * @return string
+	 */
+	protected function pageStyle1(){
+		$_GET['page'] = 1;
+		$homeUrl = $this->href . '?' . http_build_query($_GET);
+		$pageStr = "<li><a href=\"{$homeUrl}\">首页</a></li>";
+		//如果当前页不是第一页就显示上页
+		if($this->currPage > 1){
+			$_GET['page'] = $this->currPage - 1;
+			$syUrl = $this->href . '?' . http_build_query($_GET);
+			$pageStr .= "<li><a href=\"{$syUrl}\">&laquo;</a></li>";
+		}
+
+		foreach ($this->page_arr as $k => $v) {
+			$_GET['page'] = $k;
+			$pageStr .= "<li><a href=\"{$v}\">{$k}</a></li>";
+			
+		}
+
+		//如果当前页小于总页数就显示下一页
+		if($this->currPage < $this->countPages){
+			$_GET['page'] = $this->currPage + 1;
+			$xyUrl = $this->href . '?' . http_build_query($_GET);
+			$pageStr .= "<li><a href=\"{$xyUrl}\">&raquo;</a></li>";
+		}
+
+		$_GET['page'] = $this->countPages;
+		$shaDoweUrl = $this->href . '?' . http_build_query($_GET);
+		$pageStr .= "<li><a href=\"{$shaDoweUrl}\">尾页</a></li>";
+
+		return $pageStr;
+	}
+
+	/**
+	 * construct_Pages 生成页码数组
+	 * 键为页码，值为链接
+	 * $this->page_arr=Array(
+	 *                  [1] => index.php?page=1
+	 *                  [2] => index.php?page=2
+	 *                  [3] => index.php?page=3
+	 *                  ......)
+	 */
+	protected function construct_Pages(){
+		//计算总页数
+		$this->countPages = ceil($this->count / $this->subPages);
+		//根据当前页计算前后页数
+		$leftPage_num = floor($this->showPages / 2);
+		$rightPage_num = $this->showPages - $leftPage_num;
+
+		//左边显示数为当前页减左边该显示的数 例如总显示7页 当前页是5  左边最小为5-3  右边为5+3
+		$left = $this->currPage - $leftPage_num;
+		$left = max($left, 1); //左边最小不能小于1
+		$right = $left + $this->showPages - 1; //左边加显示页数减1就是右边显示数
+		$right = min($right,$this->countPages);  //右边最大不能大于总页数
+		$left = max($right-$this->showPages + 1, 1); //确定右边再计算左边，必须二次计算
+		 
+		for ($i = $left; $i <= $right; $i++) {
+			$_GET['page'] = $i;
+			$this->page_arr[$i] = $this->href . '?' . http_build_query($_GET);
 		}
 	}
-
-	/**
-	 * 每页数据显示的最大限制
-	 * @return number
-	 */
-	public function getLimit() {
-		return $this->limit;
-	}
-
-	private function setCount($count) {
-		if (!is_numeric($count) || $count <= 0) {
-			$this->count = 0;
-		} else {
-			$this->count = $count;
-		}
-	}
-
-	/**
-	 * 所有数据的记录数
-	 * @return number
-	 */
-	public function getCount() {
-		return $this->count;
-	}
-
-	private function setPageno($pageno) {
-		if (!is_numeric($pageno) || $pageno <= 1) {
-			$this->pageno = 1;
-		} elseif ($pageno > $this->maxpage) {
-			$this->pageno = $this->maxpage;
-		} else {
-			$this->pageno = $pageno;
-		}
-	}
-
-	/**
-	 * 当前正确的页数
-	 * @return number
-	 */
-	public function getPageno() {
-		return $this->pageno;
-	}
-
-	private function setMaxpage() {
-		$maxpage = ceil($this->count / $this->limit);
-		$this->maxpage = ($maxpage == 0) ? 1 : $maxpage;
-	}
-
-	/**
-	 * 最大页数
-	 * @return number
-	 */
-	public function getMaxpage() {
-		return $this->maxpage;
-	}
-
-	/**
-	 * 分页偏移量
-	 * @return number
-	 */
-	public function getOffset() {
-		return ($this->pageno - 1) * $this->limit;
-	}
-
-	/**
-	 * 初始化分页工具
-	 * @param number $pageno
-	 * @param number $limit
-	 * @param number $count
-	 */
-	public function __construct($pageno, $limit, $count) {
-		$this->setCount($count);
-		$this->setLimit($limit);
-		$this->setMaxpage();
-		$this->setPageno($pageno);
-	}
-
-	/**
-	 * 第一页的页数
-	 * @return number
-	 */
-	public function getFirstPage() {
-		return 1;
-	}
-
-	/**
-	 * 最后一页的页数
-	 * @return number
-	 */
-	public function getLastPage() {
-		return $this->maxpage;
-	}
-
-	/**
-	 * 判断当前页是否还有上一页
-	 * @return boolean
-	 */
-	public function isHasPreviousPage() {
-		if ($this->pageno - 1 <= 0) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * 判断当前页是否还有下一页
-	 * @return boolean
-	 */
-	public function isHasNextPage() {
-		if ($this->pageno + 1 > $this->maxpage) {
-			return false;
-		}
-		return true;
-	}
-
-	/**
-	 * 获取正确的上一页的页数
-	 * @return number
-	 */
-	public function getPreviousPage() {
-		if ($this->pageno - 1 <= 0) {
-			return 1;
-		}
-		return $this->pageno - 1;
-	}
-
-	/**
-	 * 获取正确的下一页的页数
-	 * @return number
-	 */
-	public function getNextPage() {
-		if ($this->pageno + 1 > $this->maxpage) {
-			return $this->maxpage;
-		}
-		return $this->pageno + 1;
-	}
-
-	public function getPageHtml($id, $class, $url, $param, $pagenoName) {
-		$html = '<ul id="' . $id . '" class="' . $class . '">';
-		if ($this->getPageno() == 1) {
-			$html .= '<li><a class="const nao" href="javascript:void(0)">首页</a><li>';
-			$html .= '<li><a class="const nao" href="javascript:void(0)">上页</a><li>';
-		} else {
-			$html .= '<li><a class="const" href="' . $url . '?' . (is_empty($param)?'':$param.'&') . $pagenoName . '=1">首页</a><li>';
-			$html .= '<li><a class="const" href="' . $url . '?' . (is_empty($param)?'':$param.'&') . $pagenoName . '=' . $this->getPreviousPage() . '">上页</a><li>';
-		}
-		for ($i = 1; $i <= $this->maxpage; $i++) {
-			if ($i == $this->getPageno()) {
-				$html .= '<li><a class="dynamic selected" href="javascript:void(0)">' . $i . '</a></li>';
-			} elseif ($i == 1 || ($i >= $this->getPageno() - 2 && $i <= $this->getPageno() + 2) || $i == $this->getMaxpage()) {
-				$html .= '<li><a class="dynamic" href="' . $url . '?' . (is_empty($param)?'':$param.'&') . $pagenoName . '=' . $i . '">' . $i . '</a></li>';
-			} elseif ($i == $this->getPageno() - 3 || $i == $this->getPageno() + 3) {
-				$html .= '<li>...</li>';
-			} else {
-				continue;
-			}
-		}
-		if ($this->getPageno() == $this->getMaxpage()) {
-			$html .= '<li><a class="const nao" href="javascript:void(0)">下页</a><li>';
-			$html .= '<li><a class="const nao" href="javascript:void(0)">尾页</a><li>';
-		} else {
-			$html .= '<li><a class="const" href="' . $url . '?' . (is_empty($param)?'':$param.'&') . $pagenoName . '=' . $this->getNextPage() . '">下页</a><li>';
-			$html .= '<li><a class="const" href="' . $url . '?' . (is_empty($param)?'':$param.'&') . $pagenoName . '=' . $this->getMaxpage() . '">尾页</a><li>';
-		}
-		$html .= '</ul>';
-		return $html;
-	}
-
 }
-
 ?>
