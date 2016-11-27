@@ -27,6 +27,14 @@ if($WebLinks) $links = $WebLinks['box'];
 $WebCss = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'css'", true);
 if($WebCss) $css = $WebCss['box'];
 
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageSize = 10;//每页显示条数
+$pageNow = ($page - 1) * $pageSize;
+$BlogNum = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC", true, true);
+$WebBlog = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC LIMIT {$pageNow}, {$pageSize}", true, true);
+
+$pageno = new Page(count($BlogNum), 5, $page, $pageSize);
+
 # ======> Login status
 if(isset($_COOKIE['user_check'])) $Admin = $mysqli->db->executeQuery("SELECT * FROM `spe_user` WHERE `user_check` = '{$_COOKIE['user_check']}'", true);
 
@@ -156,6 +164,29 @@ if($Admin) {
 			$createdata = time();
 			$addarticle = $mysqli->db->executeQuery("INSERT INTO `spe_articles` (`title`, `author`, `box`, `ip`, `createdate`) VALUES ('{$article_title}', '{$Admin['username']}', '{$article_html}', '{$ip}', {$createdata})") > 0 ? true:false;
 			if($addarticle) {
+				$result['code'] = 1;
+			}
+		}
+		exit(json_encode($result));
+	} elseif ($action == "editArticle") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$id = param_filter("id");
+		if(!is_empty($id)) {
+			$editArticle = $mysqli->db->executeQuery("SELECT * FROM `spe_articles` WHERE `id` = {$id}", true);
+			if($editArticle) {
+				$result['code'] = 1;
+				$result['data'] = $editArticle;
+			}
+		}
+		exit(json_encode($result));
+	} elseif ($action == "delArticle") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$id = param_filter("id");
+		if(!is_empty($id)) {
+			$delArticle = $mysqli->db->executeQuery("DELETE FROM `spe_articles` WHERE `id` = {$id}") > 0 ? true:false;
+			if($delArticle) {
 				$result['code'] = 1;
 			}
 		}

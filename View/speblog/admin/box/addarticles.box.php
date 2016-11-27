@@ -11,7 +11,7 @@
 	<link rel="stylesheet" type="text/css" href="View/speblog/plugin/wangEditor-2.1.22/dist/css/wangEditor.min.css">
 	
 	<!-- Editor Start -->
-	<div id="editor-container" style="width:90%">
+	<div id="editor-container" style="width:100%">
         <div id="editor-trigger" style="height:350px;max-height:500px;"></div>
     </div>
     <!-- End Editor -->
