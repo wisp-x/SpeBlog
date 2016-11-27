@@ -63,7 +63,7 @@ h6, .h6 {
 	margin-top: 20px;
 	/** border: 1px solid #DDD; **/
 }
-#blog-word {
+.blog-word {
 	margin-bottom: 10px;
 	padding: 10px;
 	border-bottom: 1px solid #DDD;

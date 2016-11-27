@@ -11,27 +11,23 @@
 	</div>
 	<div id="box" class="container">
 		<div class="row">
-			<div class="col-md-10 col-md-offset-1">
-				<div id="blog-word">
-					<h3><a href="javasecipt:void(0)">This is the title</a></h3>
-					<p>ahuhahbila哈哈哈哈哈哈哈哈哗哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哗哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈...</p>
-					<span class="text-danger">2016-11-24 22:53 by 亦痕</span>
-				</div>
-				<div id="blog-word">
-					<h3><a href="javasecipt:void(0)">This is the title</a></h3>
-					<p>6666666666666666666666666666666666666666666666666666666666666666666666666666666666666...</p>
-					<span class="text-danger">2016-11-24 22:53 by 亦痕</span>
-				</div>
-				<div id="blog-word">
-					<h3><a href="javasecipt:void(0)">This is the title</a></h3>
-					<p>哈哈哈哈哈哈哈哈哗哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哗哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈..</p>
-					<span class="text-danger">2016-11-24 22:53 by 亦痕</span>
-				</div>
-				<div id="blog-word">
-					<h3><a href="javasecipt:void(0)">This is the title</a></h3>
-					<p>zzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzzz..</p>
-					<span class="text-danger">2016-11-24 22:53 by 亦痕</span>
-				</div>
+			<div id="blog" class="col-md-10 col-md-offset-1">
+				<?php if($WebBlog) { ;?>
+				<?php for($i = 0; $i < count($WebBlog); $i++) { ;?>
+				<?php $article = ""; ;?>
+				<?php $id = $WebBlog[$i]['id']; ;?>
+				<?php $title = $WebBlog[$i]['title']; ;?>
+				<?php $box = $WebBlog[$i]['box']; ;?>
+				<?php $createdate = date("Y-m-d H:i:s", $WebBlog[$i]['createdate']); ;?>
+				<?php $author = $WebBlog[$i]['author']; ;?>
+				<?php $article .= "<div class=\"blog-word\">"; ;?>
+				<?php $article .= "		<h3><a href=\"?article={$id}\">{$title}</a></h3><br/>"; ;?>
+				<?php $article .= 		htmlspecialchars(mb_substr($box , 0 , 100) . "...") . "<br/>"; ;?>
+				<?php $article .= "		<br/><span class=\"text-danger\">{$createdate} by {$author}</span>"; ;?>
+				<?php $article .= "</div>"; ;?>
+				<?php echo $article; ;?>
+				<?php 	} ;?>
+				<?php } ;?>
 			</div>
 		</div>
 	</div>

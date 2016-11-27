@@ -27,6 +27,7 @@ if($WebLinks) $links = $WebLinks['box'];
 $WebCss = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'css'", true);
 if($WebCss) $css = $WebCss['box'];
 
+$WebBlog = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles`", true, true);
 
 require VIEW_ROUTE . "common/header.inc.php";
 require VIEW_ROUTE . "index.inc.php";
