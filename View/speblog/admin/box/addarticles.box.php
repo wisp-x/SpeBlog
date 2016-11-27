@@ -5,7 +5,7 @@
 	</blockquote>
 	<div class="form-group">
 		<label>标题</label>
-		<input type="text" id="articles_title" class="form-control" placeholder="...">
+		<input type="text" id="articles_title" class="form-control" placeholder="">
 	</div>
 	<!--引入wangEditor.css-->
 	<link rel="stylesheet" type="text/css" href="View/speblog/plugin/wangEditor-2.1.22/dist/css/wangEditor.min.css">
@@ -48,5 +48,5 @@
 
         editor.create();
     </script>
-	<br/><button type="button" id="addArticle" onclick="alert(editor.$txt.html())" class="btn btn-default">发布</button>
+	<br/><button type="button" id="addArticle" class="btn btn-default">发布</button>
 </div>

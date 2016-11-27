@@ -146,6 +146,20 @@ if($Admin) {
 			$result['code'] = 2;
 		}
 		exit(json_encode($result));
+	} elseif ($action == "addArticle") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$article_title = param_filter("articles_title");
+		$article_html = param_filter("articles_html");
+		if(!is_empty($article_title) && !is_empty($article_html)) {
+			$ip = getIP();
+			$createdata = time();
+			$addarticle = $mysqli->db->executeQuery("INSERT INTO `spe_articles` (`title`, `author`, `box`, `ip`, `createdate`) VALUES ('{$article_title}', '{$Admin['username']}', '{$article_html}', '{$ip}', {$createdata})") > 0 ? true:false;
+			if($addarticle) {
+				$result['code'] = 1;
+			}
+		}
+		exit(json_encode($result));
 	}
 }
 
