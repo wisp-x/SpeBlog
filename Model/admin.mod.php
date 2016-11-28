@@ -206,6 +206,19 @@ if($Admin) {
 		}
 		$result['data'] = $title;
 		exit(json_encode($result));
+	} elseif ($action == "systemUpdate") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$v = param_filter("v");
+		if(!is_empty($v)) {
+			$ch = curl_init();
+			curl_setopt($ch, CURLOPT_URL, "http://api.speblog.ga/getUpdate.php");
+			curl_setopt($ch, CURLOPT_RETURNTRANSFER, true) ;
+			curl_setopt($ch, CURLOPT_BINARYTRANSFER, true) ;
+			$result = curl_exec($ch);
+			curl_close($ch);
+		}
+		exit($result);
 	}
 }
 

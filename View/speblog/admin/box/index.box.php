@@ -54,7 +54,11 @@
 			</tr>
 			<tr>
 				<td>程序版本</td>
-				<td><?php echo $version ?> <button type="button" class="btn btn-primary btn-xs">检查更新</button></td>
+				<td>
+					<?php echo $version ?> 
+					<button type="button" onclick="getUpdate('<?php echo $version ?>')" id="getUpdate" class="btn btn-primary btn-xs" data-loading-text="获取新版本...">检查更新</button> 
+					<span id="update"></span>
+				</td>
 			</tr>
 		</tbody>
 	</table>
