@@ -17,6 +17,7 @@ if($WebConfig) {
 	$keywords = $WebConfig[1]['value'];
 	$description = $WebConfig[2]['value'];
 	$version = $WebConfig[3]['value'];
+	$whecomment = $WebConfig[4]['value'];
 }
 
 $WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'menu'", true);

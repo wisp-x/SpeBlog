@@ -135,6 +135,15 @@ h6, .h6 {
 #comment .row .form-group {
     margin-bottom: 6.1px;
 }
+#comment .comments {
+	vertical-align: middle;
+	padding: 8px 8px 0px 8px;
+	margin: 0px 2px 5px 2px;
+	border: 1px solid #DDD;
+	-moz-border-radius: 10px;      /* Gecko browsers */
+    -webkit-border-radius: 10px;   /* Webkit browsers */
+    border-radius: 10px;            /* W3C syntax */
+}
 @media screen and (max-width: 768px) {
     #admin_menu {
     	height: auto;

@@ -13,9 +13,10 @@ $articleID = $_GET['article'];
 if(!is_empty($articleID)) {
 	# =======> 获取文章详情
 	$articles = $mysqli->db->executeQuery("SELECT * FROM `spe_articles` WHERE `id` = {$articleID}", true, true);
-	//if($articles) {
+	if($articles) {
 		# =======> 获取该文章评论
-	//}
+		$comment = $mysqli->db->executeQuery("SELECT * FROM `spe_comment` WHERE `article_id` = {$articles[0]['id']}", true, true);
+	}
 }
 ?>
 	<div id="me">
@@ -60,6 +61,22 @@ if(!is_empty($articleID)) {
 					</div>
 				</div>
 				<div id="comment">
+				<?php if ($comment) { ?>
+					<?php for($i = 0; $i < count($comment); $i++) { ?>
+						<div class="row comments">
+							<div class="col-md-1">
+								<img src="https://ogxsqkqwg.qnssl.com/avatar/1-avatar.png?1480144637" alt="..." width="50" class="img-circle">
+							</div>
+							<div class="col-md-6">
+								<a target="_blank" href="<?php echo $comment[$i]['url'] ?>"><?php echo $comment[$i]['name'] ?></a>
+								<br/><?php echo htmlspecialchars($comment[$i]['box']) ?>
+								<br/><span class="text-danger"><?php echo date("Y-m-d H:i:s", $comment[$i]['createdate']) ?> <a href="javascript:alert('开发中')">回复</a></span>
+							</div>
+						</div>
+						<br/>
+					<?php } ?>
+				<?php } ?>
+					<?php if($whecomment == 1) { ?>
 					<div class="row">
 						<p><div class="col-md-8">
 							<div>
@@ -88,6 +105,9 @@ if(!is_empty($articleID)) {
 							<p><button type="button" class="btn btn-primary btn-block">提交评论</button>
 						</div>
 					</div>
+					<?php } else { ?>
+						<div class="text-center"><i class="fa fa-lock"></i> 管理员关闭了评论功能</div>
+					<?php } ?>
 				</div>
 			</div>
 		<?php } ?>
