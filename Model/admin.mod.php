@@ -16,6 +16,7 @@ if($WebConfig) {
 	$sitename = $WebConfig[0]['value'];
 	$keywords = $WebConfig[1]['value'];
 	$description = $WebConfig[2]['value'];
+	$version = $WebConfig[3]['value'];
 }
 
 $WebMenu = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'menu'", true);
@@ -190,6 +191,20 @@ if($Admin) {
 				$result['code'] = 1;
 			}
 		}
+		exit(json_encode($result));
+	} elseif ($action == "editArticles") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$id = param_filter("id");
+		$title = param_filter("article_title");
+		$box = param_filter("article_box");
+		if(!is_empty($id) && !is_empty($title) && !is_empty($box)) {
+			$editArticles = $mysqli->db->executeQuery("UPDATE `spe_articles` SET `title` = '{$title}', `box` = '{$box}', `author` = '{$Admin['username']}' WHERE `id` = {$id}") > 0 ? true:false;
+			if($editArticles) {
+				$result['code'] = 1;
+			}
+		}
+		$result['data'] = $title;
 		exit(json_encode($result));
 	}
 }

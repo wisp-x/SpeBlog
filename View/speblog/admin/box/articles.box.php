@@ -65,15 +65,6 @@
 			        wangEditor.config.printLog = false;
 			
 			        var editor = new wangEditor('editor-trigger');
-			
-			        // 表情显示项
-			        editor.config.emotionsShow = 'value';
-			        editor.config.emotions = {
-			            'default': {
-			                title: '默认',
-			                data: 'View/speblog/plugin/wangEditor-2.1.22/emotions.data'
-			            }
-			        };
 
 			        // 插入代码时的默认语言
 			        // editor.config.codeDefaultLang = 'html'
@@ -92,7 +83,7 @@
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-					<button type="button" class="btn btn-primary">提交更改</button>
+					<button type="button" id="editArticles" class="btn btn-primary">提交更改</button>
 				</div>
 			</div><!-- /.modal-content -->
 		</div><!-- /.modal -->

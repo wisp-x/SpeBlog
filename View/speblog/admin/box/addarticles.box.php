@@ -25,15 +25,6 @@
 
         var editor = new wangEditor('editor-trigger');
 
-        // 表情显示项
-        editor.config.emotionsShow = 'value';
-        editor.config.emotions = {
-            'default': {
-                title: '默认',
-                data: 'View/speblog/plugin/wangEditor-2.1.22/emotions.data'
-            }
-        };
-
         // 插入代码时的默认语言
         // editor.config.codeDefaultLang = 'html'
 

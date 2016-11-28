@@ -52,6 +52,10 @@
 				<td>最大上传值</td>
 				<td><?php echo ini_get('upload_max_filesize') ?></td>
 			</tr>
+			<tr>
+				<td>程序版本</td>
+				<td><?php echo $version ?> <button type="button" class="btn btn-primary btn-xs">检查更新</button></td>
+			</tr>
 		</tbody>
 	</table>
 </div>

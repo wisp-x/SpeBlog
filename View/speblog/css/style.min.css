@@ -114,3 +114,10 @@ h6, .h6 {
     	height: auto;
     }
 }
+
+@media (min-width: 768px) {
+	.modal-dialog {
+	    width: 1000px;
+	    margin: 30px auto;
+	}
+}
