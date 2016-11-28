@@ -2,7 +2,7 @@
 
 <div id="footer">
 	<hr/>
-	<?php echo $links ;?>
+	<?php echo $links ?>
 	<hr /><p class="text-center">Copyright &copy; 2016 <a href="https://www.speblog.ga">SPEBLOG</a> All rights reserved.</p>
 </div>
   <script type="text/javascript" src="//cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>

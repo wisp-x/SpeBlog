@@ -2,6 +2,7 @@
 <div id="articles">
 	<blockquote>
 		<p>文章管理</p>
+		<footer>系统共有 <?php echo count($BlogNum) ?> 篇文章</footer>
 	</blockquote>
 	<table class="table table-striped">
 		<thead>
