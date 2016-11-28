@@ -3,6 +3,9 @@
 body {
   font-family: "宋体", "新宋体";
   color: #555;
+  background: #f3f3f3;
+  word-break: break-all;
+  font-size: 1.5em;
 }
 
 a {outline: none;text-decoration: none;blr: expression(this.onFocus=this.blur());}
@@ -67,6 +70,10 @@ h6, .h6 {
 	margin-bottom: 10px;
 	padding: 10px;
 	border-bottom: 1px solid #DDD;
+	/**
+	background: #FFF;
+	box-shadow: 2px 5px 7px #DDD;
+	**/
 	word-wrap: break-word;
 	kword-break: normal;
 	word-break: break-all;
@@ -109,12 +116,30 @@ h6, .h6 {
 	padding: 20px;
 	border-bottom: 1px solid #888;
 }
+#blog-detail {
+	background: #fff;
+	padding: 20px;
+	box-shadow: 2px 5px 7px #DDD;
+	margin: 10px auto 10px auto;
+}
+#comment {
+	background: #fff;
+	padding: 20px;
+	box-shadow: 2px 5px 7px #DDD;
+	margin: 10px auto 10px auto;
+}
+#comment .row {
+	margin-right: -15px;
+    margin-left: -15px;
+}
+#comment .row .form-group {
+    margin-bottom: 6.1px;
+}
 @media screen and (max-width: 768px) {
     #admin_menu {
     	height: auto;
     }
 }
-
 @media (min-width: 768px) {
 	.modal-dialog {
 	    width: 1200px;
