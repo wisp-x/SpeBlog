@@ -1,4 +1,16 @@
-<?php if (!defined('SPEBLOG')) exit('You can not directly access the file.'); ?>
+<?php if (!defined('SPEBLOG')) exit('You can not directly access the file.');
+
+global $mysqli;
+
+$page = isset($_GET['page']) ? $_GET['page'] : 1;
+$pageSize = 10;//每页显示条数
+$pageNow = ($page - 1) * $pageSize;
+$BlogNum = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC", true, true);
+$WebBlog = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC LIMIT {$pageNow}, {$pageSize}", true, true);
+
+$pageno = new Page(count($BlogNum), 5, $page, $pageSize);
+
+?>
 <div id="articles">
 	<blockquote>
 		<p>文章管理</p>

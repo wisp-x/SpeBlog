@@ -93,7 +93,7 @@ DROP TABLE IF EXISTS `spe_comment`;
 CREATE TABLE `spe_comment` (
 	`id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '评论ID',
 	`article_id` INT NOT NULL COMMENT '所评文章ID',
-	`reply_id` INT NOT NULL COMMENT '所回复评论ID',
+	`reply_id` INT NOT NULL UNIQUE COMMENT '所回复评论ID',
 	`name` VARCHAR(64) NOT NULL COMMENT '评论者昵称',
 	`mail` VARCHAR(64) NOT NULL COMMENT '评论者邮箱',
 	`url` VARCHAR(64) NOT NULL COMMENT '评论者URL',

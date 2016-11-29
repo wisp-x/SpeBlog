@@ -29,14 +29,6 @@ if($WebLinks) $links = $WebLinks['box'];
 $WebCss = $mysqli->db->executeQuery("SELECT * FROM  `spe_system` WHERE `name` = 'css'", true);
 if($WebCss) $css = $WebCss['box'];
 
-$page = isset($_GET['page']) ? $_GET['page'] : 1;
-$pageSize = 10;//每页显示条数
-$pageNow = ($page - 1) * $pageSize;
-$BlogNum = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC", true, true);
-$WebBlog = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `createdate` DESC LIMIT {$pageNow}, {$pageSize}", true, true);
-
-$pageno = new Page(count($BlogNum), 5, $page, $pageSize);
-
 # ======> Login status
 if(isset($_COOKIE['user_check'])) $Admin = $mysqli->db->executeQuery("SELECT * FROM `spe_user` WHERE `user_check` = '{$_COOKIE['user_check']}'", true);
 
@@ -227,6 +219,15 @@ if($Admin) {
 		if(!is_empty($neb)) {
 			$swi = $mysqli->db->executeQuery("UPDATE `spe_config` SET `value` = '{$neb}' WHERE `key` = 'whecomment'") > 0 ? true:false;
 			if($swi) $result['code'] = 1;
+		}
+		exit(json_encode($result));
+	} elseif ($action == "delReplys") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$replys_id = param_filter("id");
+		if(!is_empty($replys_id)) {
+			$delReplys = $mysqli->db->executeQuery("DELETE FROM `spe_comment` WHERE `id` = {$replys_id}") > 0 ? true:false;
+			if($delReplys) $result['code'] = 1;
 		}
 		exit(json_encode($result));
 	}
