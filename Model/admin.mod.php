@@ -220,6 +220,15 @@ if($Admin) {
 			curl_close($ch);
 		}
 		exit($result);
+	} elseif ($action == "setComment") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$neb = param_filter("neb");
+		if(!is_empty($neb)) {
+			$swi = $mysqli->db->executeQuery("UPDATE `spe_config` SET `value` = '{$neb}' WHERE `key` = 'whecomment'") > 0 ? true:false;
+			if($swi) $result['code'] = 1;
+		}
+		exit(json_encode($result));
 	}
 }
 
