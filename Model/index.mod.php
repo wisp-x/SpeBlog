@@ -36,6 +36,26 @@ $WebBlog = $mysqli->db->executeQuery("SELECT * FROM  `spe_articles` ORDER BY `cr
 
 $pageno = new Page(count($BlogNum), 5, $page, $pageSize);
 
+# ======> 如果评论组件开启/这里判断一下是为了防止恶意模拟提交评论
+if($whecomment == 1) {
+	if($action == "comment_up") {
+		header("content-type:text/plain; charset=utf-8");
+		$result = array();
+		$article_id = htmlspecialchars(param_filter("article_id"));
+		$name = htmlspecialchars(param_filter("name"));
+		$mail = htmlspecialchars(param_filter("mail"));
+		$url = htmlspecialchars(param_filter("url"));
+		$txt = htmlspecialchars(param_filter("txt"));
+		$date = time();
+		$ip = getIP();
+		if(!is_empty($article_id) && !is_empty($name) && !is_empty($mail) && !is_empty($url) && !is_empty($txt)) {
+			$comment = $mysqli->db->executeQuery("INSERT INTO `spe_comment` (`article_id`, `reply_id`, `name`, `mail`, `url`, `box`, `ip`, `createdate`) VALUES ({$article_id}, '', '{$name}', '{$mail}', '{$url}', '{$txt}', '{$ip}', {$date})") > 0 ? true:false;
+			if($comment) $result['code'] = 1;
+		}
+		exit(json_encode($result));
+	}
+}
+
 require VIEW_ROUTE . "common/header.inc.php";
 require VIEW_ROUTE . "index.inc.php";
 require VIEW_ROUTE . "common/footer.inc.php";

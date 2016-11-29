@@ -80,7 +80,7 @@ if(!is_empty($articleID)) {
 					<div class="row">
 						<p><div class="col-md-8">
 							<div>
-								<textarea class="form-control" rows="7"></textarea>
+								<textarea class="form-control" id="comment_txt" rows="7"></textarea>
 							</div>
 						</div>
 						<p><div class="col-md-4">
@@ -99,10 +99,10 @@ if(!is_empty($articleID)) {
 							<div class="form-group">
 								<div class="input-group">
 									<div class="input-group-addon"><i class="fa fa-external-link"></i></div>
-									<input class="form-control" id="comment_url" type="text" placeholder="链接"/>
+									<input class="form-control" id="comment_url" type="text" value="http://" placeholder="链接"/>
 								</div>
 							</div>
-							<p><button type="button" class="btn btn-primary btn-block">提交评论</button>
+							<p><button type="button" onclick="comment_up('<?php echo $articles[0]['id'] ?>')" class="btn btn-primary btn-block">提交评论</button>
 						</div>
 					</div>
 					<?php } else { ?>

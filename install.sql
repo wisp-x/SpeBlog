@@ -94,17 +94,13 @@ CREATE TABLE `spe_comment` (
 	`id` INT NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT '评论ID',
 	`article_id` INT NOT NULL COMMENT '所评文章ID',
 	`reply_id` INT NOT NULL COMMENT '所回复评论ID',
-	`name` VARCHAR(16) NOT NULL COMMENT '评论者昵称',
-	`mail` VARCHAR(16) NOT NULL COMMENT '评论者邮箱',
+	`name` VARCHAR(64) NOT NULL COMMENT '评论者昵称',
+	`mail` VARCHAR(64) NOT NULL COMMENT '评论者邮箱',
 	`url` VARCHAR(64) NOT NULL COMMENT '评论者URL',
 	`box` VARCHAR(225) NOT NULL COMMENT '评论内容',
+	`ip` VARCHAR(15) NOT NULL COMMENT '评论人 IP',
 	`createdate` INT NOT NULL COMMENT '评论时间'
 ) ENGINE = MyISAM DEFAULT CHARSET = utf8 COLLATE utf8_general_ci;
-
--- ----------------------------
---  Records of `spe_comment`
--- ----------------------------
-INSERT INTO `spe_comment` (`article_id`, `reply_id`, `name`, `mail`, `url`, `box`, `createdate`) VALUES (17, '', '亦痕', '1591788658@qq.com', 'http://www.xlogs.cn', '6666666', 155664);
 
 
 
