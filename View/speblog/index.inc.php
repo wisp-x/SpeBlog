@@ -37,7 +37,7 @@ if(!is_empty($articleID)) {
 				<?php for($i = 0; $i < count($WebBlog); $i++) { ?>
 				<div class="blog-word">
 					<h3><a href="?article=<?php echo $WebBlog[$i]['id'] ?>"><?php echo $WebBlog[$i]['title'] ?></a></h3><br/>
-					<?php echo htmlspecialchars(mb_substr($WebBlog[$i]['box'] , 0 , 100) . "...") ?><br/></br/>
+					<?php echo htmlspecialchars(mb_substr(strip_tags($WebBlog[$i]['box']) , 0 , 100) . "...") ?><br/></br/>
 					<span class="text-danger"><?php echo date("Y-m-d H:i:s", $WebBlog[$i]['createdate']) ?> by <?php echo $WebBlog[$i]['author'] ?></span>
 				</div>
 				<?php } ?>
