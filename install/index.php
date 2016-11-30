@@ -10,7 +10,7 @@ $Step = $_GET['step'];
 
 $config_file = "../config.php";
 
-if (file_exists($config_file) && file_get_contents($config_file) == "") {
+if (!file_exists($config_file) && file_get_contents($config_file) == "") {
 	exit("程序已安装，重新安装请清空 config.php 文件");
 }
 
@@ -78,43 +78,17 @@ switch ($Step) {
   <link rel="stylesheet" href="//cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
   <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <style rel="stylesheet">
-	body {
-	  font-family: "宋体", "新宋体";
-	  color: #555;
-	  background: #f3f3f3;
-	  word-break: break-all;
-	  font-size: 1.5em;
-	  padding-top: 70px;
-	}
-	h1, .h1,
-	h2, .h2,
-	h3, .h3,
-	h4, .h4,
-	h5, .h5,
-	h6, .h6 {
-	  margin-top: 0;
-	}
-	a {outline: none;text-decoration: none;blr: expression(this.onFocus=this.blur());}
-	a:link{text-decoration:none;}
-	a:visited{text-decoration:none;}
-	a:hover{text-decoration:none;}
-	a:active{text-decoration:none;}
-	#permit {
-		height: 250px;
-		overFlow-y: scroll;
-		overFlow-x: hidden;width:
-	}
-	.tip-green {
-		color: green;
-	}
-	.tip-red {
-		color: red;
-	}
-	@media (max-width: 768px) {
-		body {
-			padding-top: 20px;
-		}
-	}
+	body{font-family:"宋体","新宋体";color:#555;background:#f3f3f3;word-break:break-all;font-size:1.5em;padding-top:70px}
+	.h1,.h2,.h3,.h4,.h5,.h6,h1,h2,h3,h4,h5,h6{margin-top:0}
+	a{outline:0;text-decoration:none;blr:expression(this.onFocus=this.blur())}
+	a:link{text-decoration:none}
+	a:visited{text-decoration:none}
+	a:hover{text-decoration:none}
+	a:active{text-decoration:none}
+	#permit{height:250px;overFlow-y:scroll;overFlow-x:hidden}
+	.tip-green{color:green}
+	.tip-red{color:red}
+	@media (max-width:768px){body{padding-top:20px}}
   </style>
 </head>
 <body>
