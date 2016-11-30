@@ -9,6 +9,8 @@
 #session_start();
 define('SPEBLOG', 'SPEBLOG');
 
+if (!file_exists("config.php") || (file_exists("config.php") && file_get_contents("config.php") == "")) header("location:install/index.php");
+
 require 'config.php';
 
 function __autoload($className) {

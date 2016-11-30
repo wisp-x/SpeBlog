@@ -66,7 +66,7 @@ if(!is_empty($articleID)) {
 					<?php for($i = 0; $i < count($comment); $i++) { ?>
 						<div class="comments">
 							<div>
-								<a target="_blank" href="<?php echo $comment[$i]['url'] ?>"><?php echo $comment[$i]['name'] ?></a> <span class="text-danger"><?php echo date("Y-m-d H:i:s", $comment[$i]['createdate']) ?></span> <a class="text-right" href="javascript:alert('开发中')">回复</a>
+								<a target="_blank" href="<?php echo $comment[$i]['url'] ?>"><?php echo $comment[$i]['name'] ?></a> <span class="text-danger"><?php echo date("Y-m-d H:i:s", $comment[$i]['createdate']) ?></span>
 								<br/><?php echo htmlspecialchars($comment[$i]['box']) ?>
 							</div>
 						</div>

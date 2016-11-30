@@ -8,13 +8,19 @@
 
 $Step = $_GET['step'];
 
+$config_file = "../config.php";
+
+if (file_exists($config_file) && file_get_contents($config_file) == "") {
+	exit("程序已安装，重新安装请清空 config.php 文件");
+}
+
 switch ($Step) {
 	case 1:
 		$title = "安装环境检测";
 		$is_support_curl = function_exists('curl_init');
 		$is_support_mysqli = class_exists('mysqli');
 		$php_version_ge530 = strnatcasecmp(PHP_VERSION, '5.3.0') >= 0 ? true : false;
-		$is_support_config_writable = is_writable("../config.php");
+		$is_support_config_writable = is_writable($config_file);
 		if (!$is_support_curl || !$is_support_mysqli || !$php_version_ge530) {
 			$tip = "<div class=\"alert alert-danger text-center\" role=\"alert\"><i class=\"fa fa-warning\"></i> 你必须保证每项通过才能安装 </div>";
 			break;
@@ -46,7 +52,7 @@ switch ($Step) {
 			}
 			$mysqli->close();
 			$mysqli = null;
-			$file_put_contents = file_put_contents("../config.php", "<?php if (!defined('SPEBLOG')) exit('You can not directly access the file.');\r\n\r\n/**\r\n * SpeBlog 配置文件\r\n * @author 熊二哈\r\n * @link http://www.xlogs.cn\r\n */\r\n\r\n/**\r\n * 数据库配置\r\n * DBHOST	数据库主机\r\n * DBUSER	数据库用户名\r\n * DBPASS	数据库密码\r\n * DBBASE	数据库名字\r\n * DBPORT	数据库端口\r\n * DBCODE	数据库编码\r\n */\r\n\r\ndefine('DBHOST', '{$db_host}');\r\ndefine('DBUSER', '{$db_user}');\r\ndefine('DBPASS', '{$db_pass}');\r\ndefine('DBBASE', '{$db_base}');\r\ndefine('DBPORT', '{$db_port}');\r\ndefine('DBCODE', '{$db_code}');\r\n\r\n/**\r\n * 其他配置\r\n * INDEX_SUFFIX		首页标题后缀\r\n */\r\ndefine('INDEX_SUFFIX', '〆我在纯白的世界里做着有关救赎的梦');\r\n\r\n/**\r\n * 系统文件夹\r\n */\r\ndefine('ROOT', dirname(__FILE__) . '/');\r\ndefine('MODEL_ROUTE', ROOT . 'Model/');\r\ndefine('CONTROLLER_ROUTE', ROOT . 'Controller/');\r\ndefine('CLASS_ROUTE', ROOT . 'Class/');\r\ndefine('DB_ROUTE', ROOT . 'Class/db/');\r\ndefine('TOOLS_ROUTE', ROOT . 'Class/tools/');\r\n\r\n/**\r\n * 默认模板\r\n * @var unknown\r\n */\r\ndefine('VIEW_ROUTE', ROOT . 'View/speblog/');\r\n?>");
+			$file_put_contents = file_put_contents($config_file, "<?php if (!defined('SPEBLOG')) exit('You can not directly access the file.');\r\n\r\n/**\r\n * SpeBlog 配置文件\r\n * @author 熊二哈\r\n * @link http://www.xlogs.cn\r\n */\r\n\r\n/**\r\n * 数据库配置\r\n * DBHOST	数据库主机\r\n * DBUSER	数据库用户名\r\n * DBPASS	数据库密码\r\n * DBBASE	数据库名字\r\n * DBPORT	数据库端口\r\n * DBCODE	数据库编码\r\n */\r\n\r\ndefine('DBHOST', '{$db_host}');\r\ndefine('DBUSER', '{$db_user}');\r\ndefine('DBPASS', '{$db_pass}');\r\ndefine('DBBASE', '{$db_base}');\r\ndefine('DBPORT', '{$db_port}');\r\ndefine('DBCODE', '{$db_code}');\r\n\r\n/**\r\n * 其他配置\r\n * INDEX_SUFFIX		首页标题后缀\r\n */\r\ndefine('INDEX_SUFFIX', '〆我在纯白的世界里做着有关救赎的梦');\r\n\r\n/**\r\n * 系统文件夹\r\n */\r\ndefine('ROOT', dirname(__FILE__) . '/');\r\ndefine('MODEL_ROUTE', ROOT . 'Model/');\r\ndefine('CONTROLLER_ROUTE', ROOT . 'Controller/');\r\ndefine('CLASS_ROUTE', ROOT . 'Class/');\r\ndefine('DB_ROUTE', ROOT . 'Class/db/');\r\ndefine('TOOLS_ROUTE', ROOT . 'Class/tools/');\r\n\r\n/**\r\n * 默认模板\r\n * @var unknown\r\n */\r\ndefine('VIEW_ROUTE', ROOT . 'View/speblog/');\r\n?>");
 			if ($file_put_contents) {
 				header("location: ?step=3");
 				break;
