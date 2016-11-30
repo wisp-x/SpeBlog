@@ -10,7 +10,7 @@ $Step = $_GET['step'];
 
 $config_file = "../config.php";
 
-if (!file_exists($config_file) && file_get_contents($config_file) == "") {
+if (file_exists($config_file) && file_get_contents($config_file) != "") {
 	exit("程序已安装，重新安装请清空 config.php 文件");
 }
 
@@ -161,7 +161,7 @@ switch ($Step) {
 						<p> -> 默认密码: <span class="text-danger">admin</span></p>
 						<p> -> 默认密码: <span class="text-danger">admin</span></p>
 						<p> -> 后台地址: <span class="text-danger">http://<?php echo $_SERVER['HTTP_HOST'] ?>/?mod=admin</span></p>
-						<p>请尽快登录后台修改密码</p>
+						<p>请删除 install 文件夹，并尽快登录后台修改密码</p>
 						<a href="../" class="btn btn-success btn-block" role="button">访问首页</a>
 						<a href="../?mod=admin" class="btn btn-success btn-block" role="button">访问后台</a>
 					</div>
