@@ -18,5 +18,5 @@
   	<?php echo $css ?>
   
   </style>
-  </head>
+</head>
 <body>
